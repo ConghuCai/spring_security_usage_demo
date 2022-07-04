@@ -8,6 +8,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,7 +24,9 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         //请求地址
-        String requestUrl = ((FilterInvocation)object).getRequestUrl();
+        HttpServletRequest request = ((FilterInvocation)object).getRequest();
+        String requestUrl = request.getServletPath();
+
 
         //查询url允许访问的role
         List<String> roles = urlRolesService.getUrlRoles(requestUrl);

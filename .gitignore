@@ -33,4 +33,3 @@ build/
 .vscode/
 
 GeneratorMapper.xml
-src/main/resources/application.properties
